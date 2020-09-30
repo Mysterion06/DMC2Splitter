@@ -10,10 +10,10 @@ state("dmc2")
 	int level:              0x157D288;	        // The level number
 	int newGameStartD:      0xF12C20; 	        // Start of a New Game run for Dante
 	int newGameStartL:      0x1588A30;	        // Start of a New Game run for Lucia
-	int nowLoading:         0x7DB46C;		    // The Now Loading screens
-	int plusStart:          0x1588BB8; 		    // Start of a New Game+ run for Dante and also Reset value
-	int shatter:            0x157D2B0;		    // Shatter screens, but actually bonus points
-    int roomID:             0x152BB98, 0x78;    // Room ID Values for all characters
+	int nowLoading:         0x7DB46C;		// The Now Loading screens
+	int plusStart:          0x1588BB8; 		// Start of a New Game+ run for Dante and also Reset value
+	int shatter:            0x157D2B0;		// Shatter screens, but actually bonus points
+    	int roomID:             0x152BB98, 0x78;    	// Room ID Values for all characters
 }
 
 init
@@ -196,7 +196,7 @@ split
 	}
 
     // Doorsplitter Dante NG+ and NG
-    if((settings["Doorsplitter Dante NG+"] || settings["Doorsplitter Dante NG"]) && vars.doorSplit.Contains(Tuple.Create(current.roomID, old.roomID, vars.split))){
+   if((settings["Doorsplitter Dante NG+"] || settings["Doorsplitter Dante NG"]) && vars.doorSplit.Contains(Tuple.Create(current.roomID, old.roomID, vars.split))){
         vars.split++;
         return true;        
     }
