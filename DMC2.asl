@@ -10,10 +10,10 @@ state("dmc2")
 	int level:              0x157D288;	        // The level number
 	int newGameStartD:      0xF12C20; 	        // Start of a New Game run for Dante
 	int newGameStartL:      0x1588A30;	        // Start of a New Game run for Lucia
-	int nowLoading:         0x7DB46C;		// The Now Loading screens
-	int plusStart:          0x1588BB8; 		// Start of a New Game+ run for Dante and also Reset value
-	int shatter:            0x157D2B0;		// Shatter screens, but actually bonus points
-    	int roomID:             0x152BB98, 0x78;    	// Room ID Values for all characters
+	int nowLoading:         0x7DB46C;		    // The Now Loading screens
+	int plusStart:          0x1588BB8; 		    // Start of a New Game+ run for Dante and also Reset value
+	int shatter:            0x157D2B0;		    // Shatter screens, but actually bonus points
+    int roomID:             0x152BB98, 0x78;    // Room ID Values for all characters
 }
 
 init
@@ -132,14 +132,12 @@ init
         Tuple.Create(49152, 61440, 32),
         Tuple.Create(86016, 49152, 33),
         Tuple.Create(139264, 86016, 34),
-        Tuple.Create(81920, 139264, 35),
+        Tuple.Create(12288, 81920, 35),
         Tuple.Create(12288, 81920, 36),
-        Tuple.Create(81920, 12288, 37),
-        Tuple.Create(12288, 81920, 38),
-        Tuple.Create(20480, 12288, 39),
-        Tuple.Create(65536, 20480, 40),
+        Tuple.Create(20480, 12288, 37)
+        Tuple.Create(65536, 20480, 38),
         // Chapter 13
-        Tuple.Create(94208, 98304, 41),
+        Tuple.Create(94208, 98304, 39),
     };
 }
 
@@ -161,7 +159,7 @@ startup
 
 start
 {
-	// Settings for Dante New Game Start
+	// Settings for Dante and Lucia New Game Start
 	if(current.newGameStartD == 32 && old.newGameStartD != 32 && settings["Dante/Lucia NG"]){
         vars.split = 0;
         vars.splitException = 0;
@@ -196,7 +194,7 @@ split
 	}
 
     // Doorsplitter Dante NG+ and NG
-   if((settings["Doorsplitter Dante NG+"] || settings["Doorsplitter Dante NG"]) && vars.doorSplit.Contains(Tuple.Create(current.roomID, old.roomID, vars.split))){
+    if((settings["Doorsplitter Dante NG+"] || settings["Doorsplitter Dante NG"]) && vars.doorSplit.Contains(Tuple.Create(current.roomID, old.roomID, vars.split))){
         vars.split++;
         return true;        
     }
@@ -236,16 +234,16 @@ split
     }
 }
 
-isLoading
-{
-	// Pause the timer if the Now Loading screen is on
-	if(current.nowLoading != 0){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
+// isLoading
+// {
+// 	// Pause the timer if the Now Loading screen is on
+// 	if(current.nowLoading != 0){
+// 		return true;
+// 	}
+// 	else{
+// 		return false;
+// 	}
+// }
 
 reset
 {
