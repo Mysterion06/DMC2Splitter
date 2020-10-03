@@ -134,7 +134,7 @@ init
         Tuple.Create(139264, 86016, 34),
         Tuple.Create(12288, 81920, 35),
         Tuple.Create(12288, 81920, 36),
-        Tuple.Create(20480, 12288, 37)
+        Tuple.Create(20480, 12288, 37),
         Tuple.Create(65536, 20480, 38),
         // Chapter 13
         Tuple.Create(94208, 98304, 39),
